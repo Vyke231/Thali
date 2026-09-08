@@ -21,7 +21,10 @@ namespace ClassThali
         /// <param name="uneHeure">heure de départ de la mini-excursion</param>
         public MiniExcursionPlanifiee(string unCode, MiniExcursion uneMiniExcursion, DateTime uneHeure)
         {
-            //TODO
+            this.code = unCode;
+            this.laMiniExcursion = uneMiniExcursion;
+            this.heureDepart = uneHeure;
+            this.nombreInscrits = 0;
         }
 
         /// <summary>
@@ -31,7 +34,7 @@ namespace ClassThali
         public string GetCode()
         {
             //TODO
-            return "";
+            return this.code;
         }
 
         /// <summary>
@@ -41,6 +44,12 @@ namespace ClassThali
         public void SetNombreInscrits(int unNombre)
         {
             //TODO
+            this.nombreInscrits += unNombre;
+        }
+
+        public int GetNombreInscrit() 
+        {
+            return this.nombreInscrits;
         }
 
         /// <summary>
@@ -50,7 +59,15 @@ namespace ClassThali
         public bool EstComplete()
         {
             //TODO
-            return true;
+            int maxPlace = laMiniExcursion.GetNombrePlaces();
+            if (maxPlace == this.nombreInscrits)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -60,7 +77,9 @@ namespace ClassThali
         public DateTime HeureRetourPrevue()
         {
             //TODO
-            return new DateTime();
+
+
+            return this.heureDepart.AddMinutes(this.laMiniExcursion.DonneDureePrevue());
         }
   
     }
